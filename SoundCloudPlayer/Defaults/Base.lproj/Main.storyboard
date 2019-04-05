@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q8G-S3-d07">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--HOME-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="SoundCloudPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chS-SF-GuK">
+                                <rect key="frame" x="0.0" y="88" width="414" height="156"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoying Our Featured Podcasts? Sign in to get access to our full list of podcasts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPV-Og-esY">
+                                        <rect key="frame" x="8" y="8" width="398" height="140"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96219235749999998" green="0.33288958619999998" blue="0.42512515229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="NPV-Og-esY" firstAttribute="leading" secondItem="chS-SF-GuK" secondAttribute="leading" constant="8" id="8k5-nk-QCr"/>
+                                    <constraint firstAttribute="bottom" secondItem="NPV-Og-esY" secondAttribute="bottom" constant="8" id="Lxk-sR-TAF"/>
+                                    <constraint firstAttribute="trailing" secondItem="NPV-Og-esY" secondAttribute="trailing" constant="8" id="Svd-xE-ecE"/>
+                                    <constraint firstAttribute="height" constant="156" id="abz-vp-stD"/>
+                                    <constraint firstItem="NPV-Og-esY" firstAttribute="top" secondItem="chS-SF-GuK" secondAttribute="top" constant="8" id="qWl-tc-GA7"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZM-fh-4c6">
+                                <rect key="frame" x="20" y="264" width="374" height="211"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="211" id="sKg-Xf-dMV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <state key="normal" title="View this podcast" backgroundImage="podcast1">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToPodcast:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pqi-5v-ctV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vZM-fh-4c6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="GEJ-5D-Ymc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vZM-fh-4c6" secondAttribute="trailing" constant="20" id="Miw-fD-fCp"/>
+                            <constraint firstItem="chS-SF-GuK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gx0-Eq-jbD"/>
+                            <constraint firstItem="vZM-fh-4c6" firstAttribute="top" secondItem="chS-SF-GuK" secondAttribute="bottom" constant="20" id="iZT-Cl-0i1"/>
+                            <constraint firstItem="chS-SF-GuK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mQp-k1-Rna"/>
+                            <constraint firstItem="chS-SF-GuK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wDj-TH-6xE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="HOME" largeTitleDisplayMode="never" id="81V-o1-5uS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
+        </scene>
+        <!--Home Navigation Controller-->
+        <scene sceneID="b47-I4-igh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q8G-S3-d07" customClass="HomeNavigationController" customModule="SoundCloudPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="j1F-ZF-gYa">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NDr-fD-ukD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vV7-pf-ipK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="782.8125"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="podcast1" width="275" height="183"/>
+    </resources>
+</document>
