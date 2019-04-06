@@ -34,9 +34,10 @@ class HomeNavigationController: UINavigationController {
         playerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-    func showPlayer(song: Song, poster: UIImage) {
+    func showPlayer(song: Song, poster: UIImage, indexOfSong: Int) {
         playerView.song = song
         playerView.posterImg = poster
+        playerView.indexOfSong = indexOfSong
         
         playerView.showFullPlayer()
         

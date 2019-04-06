@@ -28,6 +28,8 @@ class PlayerView: UIView {
         }
     }
     
+    var indexOfSong: Int!
+    
     var posterImg: UIImage? {
         didSet {
             poster.image = posterImg
@@ -87,20 +89,7 @@ class PlayerView: UIView {
             MPNowPlayingInfoCenter.default().nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = duration
         }
         
-        UIApplication.shared.beginReceivingRemoteControlEvents()
-        let commandCenter = MPRemoteCommandCenter.shared().togglePlayPauseCommand
-        commandCenter.isEnabled = true
-        commandCenter.addTarget { (event) -> MPRemoteCommandHandlerStatus in
-            self.playPause()
-            return .success
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true, options: AVAudioSession.SetActiveOptions.notifyOthersOnDeactivation)
-        } catch {
-            
-        }
+        setUpCommandCenterControls()
 
     }
     
@@ -279,14 +268,83 @@ class PlayerView: UIView {
     }
     
     @objc func move(sender: UIButton) {
-        let sec = CMTimeMake(value: 15, timescale: 1)
-        var cmt: CMTime!
+        let songCount = songList.count - 1
+        var next: Song!
         if sender.tag == 1 {
-            cmt = CMTimeAdd(player.currentTime(), sec)
+            if indexOfSong < songCount {
+                next = songList[indexOfSong + 1]
+                indexOfSong = indexOfSong + 1
+            }
         } else {
-            cmt = CMTimeSubtract(player.currentTime(), sec)
+            if indexOfSong > 0 {
+                next = songList[indexOfSong - 1]
+                indexOfSong = indexOfSong - 1
+            }
         }
-        player.seek(to: cmt)
+        if next != nil {
+            player.replaceCurrentItem(with: nil)
+            playBtn.setImage(UIImage(named: "play"), for: .normal)
+            miniPlayBtn.setImage(UIImage(named: "play"), for: .normal)
+            song = next
+        }
     }
+    
+    func nextTrackCommand() {
+        let songCount = songList.count - 1
+        var next: Song!
+        if indexOfSong < songCount {
+            next = songList[indexOfSong + 1]
+            indexOfSong = indexOfSong + 1
+        }
+        if next != nil {
+            player.replaceCurrentItem(with: nil)
+            playBtn.setImage(UIImage(named: "play"), for: .normal)
+            miniPlayBtn.setImage(UIImage(named: "play"), for: .normal)
+            song = next
+        }
+    }
+    
+    func prevTrackCommand() {
+        var next: Song!
+        if indexOfSong > 0 {
+            next = songList[indexOfSong - 1]
+            indexOfSong = indexOfSong - 1
+        }
+        if next != nil {
+            player.replaceCurrentItem(with: nil)
+            playBtn.setImage(UIImage(named: "play"), for: .normal)
+            miniPlayBtn.setImage(UIImage(named: "play"), for: .normal)
+            song = next
+        }
+    }
+}
 
+extension PlayerView {
+    func setUpCommandCenterControls() {
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.togglePlayPauseCommand.isEnabled = true
+        commandCenter.togglePlayPauseCommand.addTarget { [weak self](event) -> MPRemoteCommandHandlerStatus in
+            self!.playPause()
+            return .success
+        }
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.nextTrackCommand.addTarget { [weak self](event) -> MPRemoteCommandHandlerStatus in
+            self!.nextTrackCommand()
+            return .success
+        }
+        
+        commandCenter.previousTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.addTarget { [weak self](event) -> MPRemoteCommandHandlerStatus in
+            self!.prevTrackCommand()
+            return .success
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true, options: AVAudioSession.SetActiveOptions.notifyOthersOnDeactivation)
+        } catch {
+            print(error)
+        }
+    }
 }

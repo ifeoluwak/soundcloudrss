@@ -9,6 +9,7 @@
 import UIKit
 import FeedKit
 
+var songList = [Song]()
 class SongListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let tableV: UITableView =  {
@@ -95,13 +96,14 @@ class SongListController: UIViewController, UITableViewDelegate, UITableViewData
             })
             DispatchQueue.main.async {
                 self?.songs = songs
+                songList = songs
             }
         }
     }
     
-    func openSongPlayer(song: Song) {
+    func openSongPlayer(song: Song, indexOfSong: Int) {
         let homePage = UIApplication.shared.keyWindow?.rootViewController as! HomeNavigationController
-        homePage.showPlayer(song: song, poster: poster.image!)
+        homePage.showPlayer(song: song, poster: poster.image!, indexOfSong: indexOfSong)
     }
 }
 
@@ -119,6 +121,6 @@ extension SongListController {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let song = songs[indexPath.row]
-        openSongPlayer(song: song)
+        openSongPlayer(song: song, indexOfSong: indexPath.row)
     }
 }
